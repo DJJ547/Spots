@@ -14,7 +14,8 @@
 		<tr><td>Email: </td><td><input type="text" name="email"></td></tr>
 		<tr><td>Password: </td><td><input type="password" name="password"></td></tr>
 		<tr><td></td><td><input type="submit" value="Login">
-		<input type="button" value="Cancel" onclick="window.location='welcomePage.jsp'" ></td></tr>
+		<input type="button" value="Cancel" onclick="window.location='welcomePage.jsp'" >
+		<input type="button" value="Sign Up" onclick="window.location='spotterRegister.jsp'" ></td></tr>
 		</table>
 	</form>
 	</div>

@@ -6,21 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dai.bean.SpotterLoginBean;
-import com.dai.database.SpotterLoginDao;
+import com.dai.database.SpotterDatabase;
 
-
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/spotterlogin")
 public class SpotterLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private SpotterLoginDao loginDao;
+    private SpotterDatabase spotterDb;
 
     public void init() {
-        loginDao = new SpotterLoginDao();
+    	spotterDb = new SpotterDatabase();
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,9 +30,10 @@ public class SpotterLoginServlet extends HttpServlet {
         loginBean.setPassword(password);
 
         try {
-            if (loginDao.validate(loginBean)) {
-            	request.setAttribute("email",email);
-            	request.getRequestDispatcher("spots.jsp").forward(request, response); 
+            if (spotterDb.validate(loginBean)) {
+            	HttpSession session = request.getSession();
+	            session.setAttribute("email",email);
+	            response.sendRedirect("spotterPage.jsp");
             } else {
             	response.sendRedirect("spotterLogin.jsp");
             }

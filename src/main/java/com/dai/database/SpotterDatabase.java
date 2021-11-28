@@ -5,11 +5,25 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.dai.bean.SpotHostLoginBean;
+import com.dai.bean.SpotterLoginBean;
 
-public class SpotHostLoginDao {
+public class SpotterDatabase {
 	
-	public boolean validate(SpotHostLoginBean loginBean) throws ClassNotFoundException {
+	public Connection getCon() {
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "Djj@19950420");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return con;
+	}
+	
+	public boolean validate(SpotterLoginBean loginBean) throws ClassNotFoundException {
         boolean status = false;
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -19,7 +33,7 @@ public class SpotHostLoginDao {
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection
-            .prepareStatement("select * from spothost where host_email = ? and password = ? ")) {
+            .prepareStatement("select * from spotter where spotter_email = ? and password = ? ")) {
             preparedStatement.setString(1, loginBean.getEmail());
             preparedStatement.setString(2, loginBean.getPassword());
 
@@ -50,3 +64,4 @@ public class SpotHostLoginDao {
         }
     }
 }
+

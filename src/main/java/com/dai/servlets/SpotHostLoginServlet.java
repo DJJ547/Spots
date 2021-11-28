@@ -6,20 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dai.bean.SpotHostLoginBean;
-import com.dai.database.SpotHostLoginDao;
+import com.dai.database.SpotHostDatabase;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/spothostlogin")
 public class SpotHostLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private SpotHostLoginDao loginDao;
+    private SpotHostDatabase spotHostDb;
 
     public void init() {
-        loginDao = new SpotHostLoginDao();
+    	spotHostDb = new SpotHostDatabase();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,9 +30,10 @@ public class SpotHostLoginServlet extends HttpServlet {
         loginBean.setPassword(password);
 
         try {
-            if (loginDao.validate(loginBean)) {
-            	request.setAttribute("email",email);
-            	request.getRequestDispatcher("spotHostPage.jsp").forward(request, response);
+            if (spotHostDb.validate(loginBean)) {
+            	HttpSession session = request.getSession();
+	            session.setAttribute("email",email);
+	            response.sendRedirect("spotHostPage.jsp");
             } else {
             	response.sendRedirect("spotHostLogin.jsp");
             }

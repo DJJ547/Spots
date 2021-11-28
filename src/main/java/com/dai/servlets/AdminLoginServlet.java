@@ -8,18 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dai.bean.AdminLoginBean;
-import com.dai.database.AdminLoginDao;
+import com.dai.database.AdminDatabase;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/adminlogin")
 public class AdminLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private AdminLoginDao loginDao;
+    private AdminDatabase adminDb;
 
     public void init() {
-        loginDao = new AdminLoginDao();
+    	adminDb = new AdminDatabase();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,8 +29,8 @@ public class AdminLoginServlet extends HttpServlet {
         loginBean.setPassword(password);
 
         try {
-            if (loginDao.validate(loginBean)) {
-                response.sendRedirect("spots.jsp");
+            if (adminDb.validate(loginBean)) {
+                //response.sendRedirect("spots.jsp");
             } else {
             	response.sendRedirect("adminLogin.jsp");
             }

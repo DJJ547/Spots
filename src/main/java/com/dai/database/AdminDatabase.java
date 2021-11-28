@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 
 import com.dai.bean.AdminLoginBean;
 
-public class AdminLoginDao {
-
+public class AdminDatabase {
+	
 	public boolean validate(AdminLoginBean loginBean) throws ClassNotFoundException {
         boolean status = false;
 
