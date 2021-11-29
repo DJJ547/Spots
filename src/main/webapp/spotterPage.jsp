@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
   <%
    String db = "spots";
    String user = "root";
-   String password = "Djj@19950420";
+   String password = "password";
       
 	try {   
             java.sql.Connection con; 

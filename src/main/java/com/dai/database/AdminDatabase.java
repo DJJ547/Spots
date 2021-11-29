@@ -14,7 +14,7 @@ public class AdminDatabase {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "Djj@19950420");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "password");
 			PreparedStatement pst = con.prepareStatement("select first_name from admin where admin_id = ?");
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
@@ -34,7 +34,7 @@ public class AdminDatabase {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "Djj@19950420");
+            .getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "password");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection
