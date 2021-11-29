@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dai.bean.AdminLoginBean;
 import com.dai.database.AdminDatabase;
@@ -27,10 +28,14 @@ public class AdminLoginServlet extends HttpServlet {
         AdminLoginBean loginBean = new AdminLoginBean();
         loginBean.setID(id);
         loginBean.setPassword(password);
+        String firstName = adminDb.getFirstName(id);
 
         try {
             if (adminDb.validate(loginBean)) {
-                //response.sendRedirect("spots.jsp");
+            	HttpSession session = request.getSession();
+	            session.setAttribute("adminID",id);
+	            session.setAttribute("firstName",firstName);
+                response.sendRedirect("adminManageSpotter.jsp");
             } else {
             	response.sendRedirect("adminLogin.jsp");
             }

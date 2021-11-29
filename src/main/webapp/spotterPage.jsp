@@ -7,9 +7,12 @@ pageEncoding="UTF-8"%>
   <title >Spotter Search Page</title>
   </head>
   <body>
-  <% String email = (String)session.getAttribute("email");%>
-  
-  <h1 align="center">Welcome! Spotter: <%out.println(email); %></h1>
+  <% 
+  String email = (String)session.getAttribute("email");
+  String firstName = (String)session.getAttribute("firstName");
+  %>
+  <%out.println(email); %>
+  <h1 align="center">Welcome! Spotter: <%out.println(firstName); %></h1><br/>
   <form id="form" method="post" action="spottersearch">
   <label>Search by Spots Name</label>
   <input type="text" name="name" class="form-control" id="name" placeholder="Enter name keyword">

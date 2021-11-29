@@ -28,11 +28,13 @@ public class SpotHostLoginServlet extends HttpServlet {
         SpotHostLoginBean loginBean = new SpotHostLoginBean();
         loginBean.setEmail(email);
         loginBean.setPassword(password);
+        String firstName = spotHostDb.getFirstName(email);
 
         try {
             if (spotHostDb.validate(loginBean)) {
             	HttpSession session = request.getSession();
 	            session.setAttribute("email",email);
+	            session.setAttribute("firstName",firstName);
 	            response.sendRedirect("spotHostPage.jsp");
             } else {
             	response.sendRedirect("spotHostLogin.jsp");

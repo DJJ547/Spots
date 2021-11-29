@@ -9,6 +9,25 @@ import com.dai.bean.AdminLoginBean;
 
 public class AdminDatabase {
 	
+	public String getFirstName(String id) {
+		String firstName = null;
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "Djj@19950420");
+			PreparedStatement pst = con.prepareStatement("select first_name from admin where admin_id = ?");
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			firstName = rs.getString(1);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return firstName;
+	}
+	
 	public boolean validate(AdminLoginBean loginBean) throws ClassNotFoundException {
         boolean status = false;
 

@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.sql.Statement;
+
 import com.dai.bean.SpotterLoginBean;
 
 public class SpotterDatabase {
@@ -21,6 +23,25 @@ public class SpotterDatabase {
 		}
 		
 		return con;
+	}
+	
+	public String getFirstName(String email) {
+		String firstName = null;
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spots?allowPublicKeyRetrieval=true&useSSL=false", "root", "Djj@19950420");
+			PreparedStatement pst = con.prepareStatement("select first_name from spotter where spotter_email = ?");
+			pst.setString(1, email);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			firstName = rs.getString(1);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return firstName;
 	}
 	
 	public boolean validate(SpotterLoginBean loginBean) throws ClassNotFoundException {

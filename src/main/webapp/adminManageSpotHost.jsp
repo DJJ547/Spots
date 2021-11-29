@@ -5,20 +5,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Spot Host Page</title>
+<title>Admin Manage Spot Host Page</title>
 </head>
 <body>
 <%
-String email = (String)session.getAttribute("email");
+String id = (String)session.getAttribute("adminID");
 String firstName = (String)session.getAttribute("firstName");
 %>
-<%out.println(email); %>
-<h1 align="center">Welcome! Spot Host: <%out.println(firstName); %></h1>
-<form id="form" method="post" action="spothostsearch">
-<label>Search by Spots Name</label>
-<input type="text" name="name" class="form-control" id="name" placeholder="Enter name keyword">
+<h1 align="center">Welcome! Admin #<%out.println(id); %> <%out.println(firstName); %></h1>
+<form id="form" method="post" action="adminSearchSpotHost">
+<label>Search by Spot Host Name: </label>
+<input type="text" name="spotHostName" class="form-control" id="spotHostName" placeholder="Enter name keyword">
 <Button class="btn btn-success" style="width: 80px;">Search</Button>
-<input type="button" value="Create New Spot" onclick="window.location='createSpot.jsp'" >
+</form>
+<form id="form" method="post" action="adminManageSpotHost">
+<input type="button" value="Manage Spotter" onclick="window.location='adminManageSpotter.jsp'" >
 <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
 </form>
 <%
@@ -32,37 +33,32 @@ try {
    ResultSet rs;
    Class.forName("com.mysql.cj.jdbc.Driver");
    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db+"?allowPublicKeyRetrieval=true&useSSL=false",user, password);
-   String name = request.getParameter("name");
+   String name = request.getParameter("spotHostName");
    if(name == null){
-      	pst = con.prepareStatement("select spot_id, name, address, city, zipcode, creation_date from spots where spot_id in (select spot_id from creates where host_email = ?)");
-      	pst.setString(1, email);
+      	pst = con.prepareStatement("select host_email, first_name, last_name from spothost");
       	rs = pst.executeQuery();
 %>
       	<table border="1" align="center">
-      	<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
-      	<th>Creation Date</th>
+      	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
       	<%
       	while(rs.next()){
       	%>
           	<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
-          	<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
       <%}%>
       </table>
 <%
    } else{
-       	pst = con.prepareStatement("select spot_id, name, address, city, zipcode, creation_date from spots where spot_id in (select spot_id from creates where host_email = ?) and name like ?");
-       	pst.setString(1, email);
+       	pst = con.prepareStatement("select host_email, first_name, last_name from spothost where first_name like ? or last_name like ?");
+       	pst.setString(1, "%" + name + "%");
        	pst.setString(2, "%" + name + "%");
        	rs = pst.executeQuery();
 %>
        	<table border="1" align="center">
-       	<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
-       	<th>Creation Date</th>
+       	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
        	<%
        	while(rs.next()){
        	%>
        		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
-       		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
       <%}%>
       	</table>
   <%}

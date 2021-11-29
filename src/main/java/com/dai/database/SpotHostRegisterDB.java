@@ -14,7 +14,7 @@ public class SpotHostRegisterDB {
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate("insert into spothost(first_name, last_name, host_email, password) values('"+srb.getFirstName()+"','"+srb.getLastName()+"','"+srb.getEmail()+"','"+srb.getPassword()+"')");
-			s1 = "Successfully inserted.";
+			s1 = "spot host successfully inserted into table spothost.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

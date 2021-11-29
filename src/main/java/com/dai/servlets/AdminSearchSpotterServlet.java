@@ -9,17 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SpotHostSearchServlet
+ * Servlet implementation class AdminSearchSpotterServlet
  */
-@WebServlet("/spothostsearch")
-public class SpotHostSearchServlet extends HttpServlet {
+@WebServlet("/adminSearchSpotter")
+public class AdminSearchSpotterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SpotHostSearchServlet() {
+    public AdminSearchSpotterServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,11 +34,8 @@ public class SpotHostSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   	try {
-            request.getRequestDispatcher("spotHostPage.jsp").forward(request, response);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		HttpSession session = request.getSession();
+		request.getRequestDispatcher("adminManageSpotter.jsp").forward(request, response);
+	}
+
 }

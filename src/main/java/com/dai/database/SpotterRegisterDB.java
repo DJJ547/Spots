@@ -14,7 +14,7 @@ public class SpotterRegisterDB {
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate("insert into spotter(first_name, last_name, spotter_email, password) values('"+srb.getFirstName()+"','"+srb.getLastName()+"','"+srb.getEmail()+"','"+srb.getPassword()+"')");
-			s1 = "Successfully inserted.";
+			s1 = "Spotter successfully inserted into table spotter.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

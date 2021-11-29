@@ -28,11 +28,13 @@ public class SpotterLoginServlet extends HttpServlet {
         SpotterLoginBean loginBean = new SpotterLoginBean();
         loginBean.setEmail(email);
         loginBean.setPassword(password);
-
+        String firstName = spotterDb.getFirstName(email);
+        
         try {
             if (spotterDb.validate(loginBean)) {
             	HttpSession session = request.getSession();
 	            session.setAttribute("email",email);
+	            session.setAttribute("firstName",firstName);
 	            response.sendRedirect("spotterPage.jsp");
             } else {
             	response.sendRedirect("spotterLogin.jsp");

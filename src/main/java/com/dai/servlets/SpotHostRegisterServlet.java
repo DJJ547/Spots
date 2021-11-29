@@ -28,7 +28,7 @@ public class SpotHostRegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("spotHostRegister.jsp").forward(request, response);
+		//request.getRequestDispatcher("spotHostRegister.jsp").forward(request, response);
 	}
 
 	/**
@@ -50,6 +50,8 @@ public class SpotHostRegisterServlet extends HttpServlet {
         SpotHostRegisterDB srdb = new SpotHostRegisterDB();
         String s1 = srdb.insertUser(srb);
         System.out.println(s1);
+        
+        response.sendRedirect("spotHostLogin.jsp");
 	}
 
 }
