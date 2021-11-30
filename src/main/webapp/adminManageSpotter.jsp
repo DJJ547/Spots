@@ -12,7 +12,7 @@
 String id = (String)session.getAttribute("adminID");
 String firstName = (String)session.getAttribute("firstName");
 %>
-<h1 align="center">Welcome! Admin #<%out.println(id); %> <%out.println(firstName); %></h1>
+<h1 align="center">Welcome! Admin #<%out.println(id); %>: <%out.println(firstName); %></h1>
 <form id="form" method="post" action="adminSearchSpotter">
 <label>Search by Spotter Name: </label>
 <input type="text" name="spotterName" class="form-control" id="spotterName" placeholder="Enter name keyword">
@@ -38,7 +38,7 @@ try {
       	pst = con.prepareStatement("select spotter_email, first_name, last_name from spotter");
       	rs = pst.executeQuery();
 %>
-      	<table border="1" align="center">
+      	<table border="1">
       	<tr><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
       	<%
       	while(rs.next()){
@@ -53,7 +53,7 @@ try {
        	pst.setString(2, "%" + name + "%");
        	rs = pst.executeQuery();
 %>
-       	<table border="1" align="center">
+       	<table border="1">
        	<tr><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
        	<%
        	while(rs.next()){

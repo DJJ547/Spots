@@ -12,13 +12,13 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class AdminSearchSpotHost
  */
 @WebServlet("/adminSearchSpotHost")
-public class AdminSearchSpotHost extends HttpServlet {
+public class AdminSearchSpotHostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminSearchSpotHost() {
+    public AdminSearchSpotHostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -12,14 +12,14 @@
 String id = (String)session.getAttribute("adminID");
 String firstName = (String)session.getAttribute("firstName");
 %>
-<h1 align="center">Welcome! Admin #<%out.println(id); %> <%out.println(firstName); %></h1>
+<h1 align="center">Welcome! Admin #<%out.println(id); %>: <%out.println(firstName); %></h1>
 <form id="form" method="post" action="adminSearchSpotHost">
 <label>Search by Spot Host Name: </label>
 <input type="text" name="spotHostName" class="form-control" id="spotHostName" placeholder="Enter name keyword">
 <Button class="btn btn-success" style="width: 80px;">Search</Button>
 </form>
 <form id="form" method="post" action="adminManageSpotHost">
-<input type="button" value="Manage Spotter" onclick="window.location='adminManageSpotter.jsp'" >
+<input type="button" value="Manage Spots" onclick="window.location='adminManageSpots.jsp'" >
 <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
 </form>
 <%
@@ -38,7 +38,7 @@ try {
       	pst = con.prepareStatement("select host_email, first_name, last_name from spothost");
       	rs = pst.executeQuery();
 %>
-      	<table border="1" align="center">
+      	<table border="1">
       	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
       	<%
       	while(rs.next()){
@@ -53,7 +53,7 @@ try {
        	pst.setString(2, "%" + name + "%");
        	rs = pst.executeQuery();
 %>
-       	<table border="1" align="center">
+       	<table border="1">
        	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
        	<%
        	while(rs.next()){

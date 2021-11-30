@@ -38,7 +38,7 @@ try {
       	pst.setString(1, email);
       	rs = pst.executeQuery();
 %>
-      	<table border="1" align="center">
+      	<table border="1">
       	<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
       	<th>Creation Date</th>
       	<%
@@ -55,7 +55,7 @@ try {
        	pst.setString(2, "%" + name + "%");
        	rs = pst.executeQuery();
 %>
-       	<table border="1" align="center">
+       	<table border="1">
        	<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
        	<th>Creation Date</th>
        	<%
