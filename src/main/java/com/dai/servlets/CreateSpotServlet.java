@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dai.database.NewSpotRegisterDB;
+import com.dai.database.SpotsDatabase;
 import com.dai.bean.CreateSpotBean;
 /**
  * Servlet implementation class CreateSpotServlet
@@ -47,8 +47,8 @@ public class CreateSpotServlet extends HttpServlet {
         csb.setCity(city);
         csb.setZipcode(zipcode);
         
-        NewSpotRegisterDB nsr = new NewSpotRegisterDB();
-        String s1 = nsr.insertSpot(csb);
+        SpotsDatabase sdb = new SpotsDatabase();
+        String s1 = sdb.insertSpot(csb);
         System.out.println(s1);
         
         response.sendRedirect("spotHostPage.jsp");

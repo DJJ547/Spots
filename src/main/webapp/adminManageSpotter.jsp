@@ -44,6 +44,7 @@ try {
       	while(rs.next()){
       	%>
           	<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
+      		<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
       <%}%>
       </table>
 <%
@@ -59,6 +60,7 @@ try {
        	while(rs.next()){
        	%>
        		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
+      		<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
       <%}%>
       	</table>
   <%}

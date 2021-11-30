@@ -47,13 +47,13 @@ pageEncoding="UTF-8"%>
             		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
             		<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
             		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
+            		
             		<form id="form" method="post" action="opendetail">
-              		<td align="center"><input type="button" name="<%=idCounter%>" value="Favorite" onclick="window.location='welcomePage.jsp'"></input></td>
+              		<td align="center"><input type="button" name="Detail" value="Detail" onclick="window.location='spotDetailPage.jsp'"></input></td>
+              		<td align="center"><input type="button" name="Favorite" value="Favorite" onclick="window.location='spotterFavoritePage.jsp'"></input></td>
+              		</form>
               		<% 
               		idCounter++;
-              		%>
-              		</form>
-              	<%
               	}
               	%>
               </table>
@@ -72,9 +72,15 @@ pageEncoding="UTF-8"%>
             		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
             		<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
             		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
-              <%}%>
-              </table>
-            <%}
+              
+              		<form id="form" method="post" action="opendetail">
+              		<td align="center"><input type="button" name="Detail" value="Detail" onclick="window.location='spotDetailPage.jsp'"></input></td>
+              		<td align="center"><input type="button" name="Favorite" value="Favorite" onclick="window.location='spotterFavoritePage.jsp'"></input></td>
+              		</form>
+              <%}
+            }
+            %></table>
+    <%
     } catch(SQLException e) { 
            out.println("SQLException caught: " + e.getMessage()); 
     }%>

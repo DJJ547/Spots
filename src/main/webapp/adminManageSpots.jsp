@@ -49,6 +49,7 @@ try {
    			<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
    			<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
    			<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
+      		<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
       <%}%>
      </table>
 <%
@@ -67,6 +68,7 @@ try {
    			<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
    			<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
    			<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
+      		<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
       <%}%>
      	</table>
   <%}
