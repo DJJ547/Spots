@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dai.bean.SpotHostRegisterBean;
-import com.dai.database.SpotHostRegisterDB;
+import com.dai.database.SpotsDatabase;
+import com.dai.model.SpotHostModel;
 
 /**
  * Servlet implementation class SpotHostRegisterServlet
@@ -41,17 +41,17 @@ public class SpotHostRegisterServlet extends HttpServlet {
         String spotterEmail = request.getParameter("spotterEmail");
         String password = request.getParameter("password");
         
-        SpotHostRegisterBean srb = new SpotHostRegisterBean();
+        SpotHostModel srb = new SpotHostModel();
         srb.setFirstName(firstName);
         srb.setLastName(lastName);
         srb.setEmail(spotterEmail);
         srb.setPassword(password);
         
-        SpotHostRegisterDB srdb = new SpotHostRegisterDB();
-        String s1 = srdb.insertUser(srb);
+        SpotsDatabase srdb = new SpotsDatabase();
+        String s1 = srdb.insertSpotHost(srb);
         System.out.println(s1);
         
-        response.sendRedirect("spotHostLogin.jsp");
+        request.getRequestDispatcher("spotHostLogin.jsp").forward(request, response);
 	}
 
 }

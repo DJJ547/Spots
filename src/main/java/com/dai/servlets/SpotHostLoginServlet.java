@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dai.bean.SpotHostLoginBean;
-import com.dai.database.SpotHostDatabase;
+import com.dai.model.SpotHostModel;
+import com.dai.database.SpotsDatabase;
 
 @WebServlet("/spothostlogin")
 public class SpotHostLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private SpotHostDatabase spotHostDb;
+    private SpotsDatabase spots = new SpotsDatabase();
 
     public void init() {
-    	spotHostDb = new SpotHostDatabase();
+    	spots = new SpotsDatabase();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,19 +25,22 @@ public class SpotHostLoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        SpotHostLoginBean loginBean = new SpotHostLoginBean();
-        loginBean.setEmail(email);
-        loginBean.setPassword(password);
-        String firstName = spotHostDb.getFirstName(email);
+        SpotHostModel spothost = new SpotHostModel();
+        spothost.setEmail(email);
+        spothost.setPassword(password);
 
         try {
-            if (spotHostDb.validate(loginBean)) {
+            if (spots.validateSpotHost(spothost)) {
+            	String firstName = spots.getSpotHostFirstName(email);
+            	
             	HttpSession session = request.getSession();
 	            session.setAttribute("email",email);
 	            session.setAttribute("firstName",firstName);
-	            response.sendRedirect("spotHostPage.jsp");
+	            request.setAttribute("loginResult", true);
+            	request.getRequestDispatcher("spotHostPage.jsp").forward(request, response);
             } else {
-            	response.sendRedirect("spotHostLogin.jsp");
+            	request.setAttribute("loginResult", false);
+            	request.getRequestDispatcher("spotHostLogin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

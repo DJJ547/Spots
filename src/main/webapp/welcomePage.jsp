@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Welcome to Spots!</title>
+<link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 	<div align="center">

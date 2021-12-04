@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="com.dai.database.SpotsDatabase"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Spot Host Page</title>
+<link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 <%
+request.getSession();
 String email = (String)session.getAttribute("email");
 String firstName = (String)session.getAttribute("firstName");
 %>
@@ -17,21 +20,16 @@ String firstName = (String)session.getAttribute("firstName");
 <form id="form" method="post" action="spothostsearch">
 <label>Search by Spots Name</label>
 <input type="text" name="name" class="form-control" id="name" placeholder="Enter name keyword">
-<Button class="btn btn-success" style="width: 80px;">Search</Button>
+<input type="submit" value="Search">
+</form>
 <input type="button" value="Create New Spot" onclick="window.location='createSpot.jsp'" >
 <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
-</form>
-<%
-String db = "spots";
-String user = "root";
-String password = "password";
-      
+<%     
 try {   
-   java.sql.Connection con; 
+   SpotsDatabase spot = new SpotsDatabase();
+   Connection con = spot.getCon();
    PreparedStatement pst;
    ResultSet rs;
-   Class.forName("com.mysql.cj.jdbc.Driver");
-   con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db+"?allowPublicKeyRetrieval=true&useSSL=false",user, password);
    String name = request.getParameter("name");
    if(name == null){
       	pst = con.prepareStatement("select spot_id, name, address, city, zipcode, creation_date from spots where spot_id in (select spot_id from creates where host_email = ?)");
@@ -45,8 +43,7 @@ try {
       	while(rs.next()){
       	%>
           	<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
-          	<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
-          	<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
+          	<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td></tr>
       <%}%>
       </table>
 <%
@@ -63,8 +60,7 @@ try {
        	while(rs.next()){
        	%>
        		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
-       		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
-      		<td align="center"><input type="button" name="Delete" value="Delete"></input></td>
+       		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td></tr>
       <%}%>
       	</table>
   <%}

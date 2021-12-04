@@ -1,16 +1,19 @@
-package com.dai.bean;
+package com.dai.model;
 
-public class SpotHostRegisterBean {
+public class SpotterModel {
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	
-	public SpotHostRegisterBean() {
-		super();
+	public SpotterModel() {
+		firstName = null;
+		lastName = null;
+		email = "default";
+		password = "default";
 	}
 	
-	public SpotHostRegisterBean(String firstName, String lastName, String email, String password) {
+	public SpotterModel(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -20,27 +23,32 @@ public class SpotHostRegisterBean {
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 }

@@ -34,8 +34,6 @@ public class AdminManageSpotterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String id = request.getParameter("spotID");
-			HttpSession session = request.getSession();
 			request.getRequestDispatcher("adminManageSpotHost.jsp").forward(request, response);
             
         } catch (Exception e) {

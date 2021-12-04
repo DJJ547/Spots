@@ -8,36 +8,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dai.bean.AdminLoginBean;
-import com.dai.database.AdminDatabase;
+import com.dai.database.SpotsDatabase;
+import com.dai.model.AdminModel;
 
 @WebServlet("/adminlogin")
 public class AdminLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private AdminDatabase adminDb;
+    private SpotsDatabase database = new SpotsDatabase();;
 
-    public void init() {
-    	adminDb = new AdminDatabase();
+    public void initialize() {
+    	database = new SpotsDatabase();
     }
-
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    	
+    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
         String id = request.getParameter("adminID");
-        String password = request.getParameter("password");
-        AdminLoginBean loginBean = new AdminLoginBean();
-        loginBean.setID(id);
-        loginBean.setPassword(password);
-        String firstName = adminDb.getFirstName(id);
+    	String password = request.getParameter("password");
+        AdminModel admin = new AdminModel();
+        admin.setID(id);
+        admin.setPassword(password);
 
         try {
-            if (adminDb.validate(loginBean)) {
+            if (database.validateAdmin(admin)) {
+            	String firstName = database.getAdminFirstName(id);
+            	
             	HttpSession session = request.getSession();
 	            session.setAttribute("adminID",id);
 	            session.setAttribute("firstName",firstName);
-                response.sendRedirect("adminManageSpotter.jsp");
+	            request.setAttribute("loginResult", true);
+	            request.getRequestDispatcher("adminManageSpotter.jsp").forward(request, response);
             } else {
-            	response.sendRedirect("adminLogin.jsp");
+            	request.setAttribute("loginResult", false);
+            	request.getRequestDispatcher("adminLogin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="com.dai.database.SpotsDatabase"%>
 <!DOCTYPE html>
 <html>
   <head>
   <title >Spotter Search Page</title>
+  <link href="css/index.css" rel="stylesheet">
   </head>
   <body>
-  <% 
+  <%
+  request.getSession();
   String email = (String)session.getAttribute("email");
   String firstName = (String)session.getAttribute("firstName");
   %>
@@ -15,21 +18,16 @@ pageEncoding="UTF-8"%>
   <h1 align="center">Welcome! Spotter: <%out.println(firstName); %></h1><br/>
   <form id="form" method="post" action="spottersearch">
   <label>Search by Spots Name</label>
-  <input type="text" name="name" class="form-control" id="name" placeholder="Enter name keyword">
-  <Button class="btn btn-success" style="width: 80px;">Search</Button>
-  <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
+  <input type="text" name="name" id="name" placeholder="Enter name keyword"/>
+  <input type="submit" value="Search">
   </form>
-  <%
-   String db = "spots";
-   String user = "root";
-   String password = "password";
-      
-	try {   
-            java.sql.Connection con; 
-            PreparedStatement pst;
-            ResultSet rs;
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db+"?allowPublicKeyRetrieval=true&useSSL=false",user, password);
+  <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
+  <%     
+try {   
+   SpotsDatabase spot = new SpotsDatabase();
+   Connection con = spot.getCon();
+   PreparedStatement pst;
+   ResultSet rs;
             String name = request.getParameter("name");
             if(name == null){
             	pst = con.prepareStatement("select spot_id, name, address, city, zipcode, group_size, category_1, category_2, category_3, noise_level, creation_date from spots");
@@ -46,11 +44,7 @@ pageEncoding="UTF-8"%>
             		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
             		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
             		<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
-            		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
-            		
-            		<form id="form" method="post" action="opendetail">
-              		<td align="center"><input type="button" name="Detail" value="Detail" onclick="window.location='spotDetailPage.jsp'"></input></td>
-              		<td align="center"><input type="button" name="Favorite" value="Favorite" onclick="window.location='spotterFavoritePage.jsp'"></input></td>
+            		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td></tr>
               		</form>
               		<% 
               		idCounter++;
@@ -71,12 +65,7 @@ pageEncoding="UTF-8"%>
             		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
             		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
             		<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
-            		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>
-              
-              		<form id="form" method="post" action="opendetail">
-              		<td align="center"><input type="button" name="Detail" value="Detail" onclick="window.location='spotDetailPage.jsp'"></input></td>
-              		<td align="center"><input type="button" name="Favorite" value="Favorite" onclick="window.location='spotterFavoritePage.jsp'"></input></td>
-              		</form>
+            		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td></tr>
               <%}
             }
             %></table>

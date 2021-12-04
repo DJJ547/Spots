@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dai.bean.SpotterLoginBean;
-import com.dai.database.SpotterDatabase;
+import com.dai.database.SpotsDatabase;
+import com.dai.model.SpotterModel;
 
 @WebServlet("/spotterlogin")
 public class SpotterLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private SpotterDatabase spotterDb;
+    private SpotsDatabase spots = new SpotsDatabase();
 
     public void init() {
-    	spotterDb = new SpotterDatabase();
+    	spots = new SpotsDatabase();
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -25,19 +25,22 @@ public class SpotterLoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        SpotterLoginBean loginBean = new SpotterLoginBean();
+        SpotterModel loginBean = new SpotterModel();
         loginBean.setEmail(email);
         loginBean.setPassword(password);
-        String firstName = spotterDb.getFirstName(email);
         
         try {
-            if (spotterDb.validate(loginBean)) {
+            if (spots.validateSpotter(loginBean)) {
+            	String firstName = spots.getSpotterFirstName(email);
+            	
             	HttpSession session = request.getSession();
 	            session.setAttribute("email",email);
 	            session.setAttribute("firstName",firstName);
-	            response.sendRedirect("spotterPage.jsp");
+	            request.setAttribute("loginResult", true);
+	            request.getRequestDispatcher("spotterPage.jsp").forward(request, response);
             } else {
-            	response.sendRedirect("spotterLogin.jsp");
+            	request.setAttribute("loginResult", false);
+            	request.getRequestDispatcher("spotterLogin.jsp").forward(request, response);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

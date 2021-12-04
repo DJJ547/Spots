@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+body {
+	margin: 200px,200px,200px,200px;
+	font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+	background: #1A1E26;
+	color: #fff;
+}
+
+h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 900;
+}
+
+table {
+
+  max-width: 100%;
+
+}
+
+
+tr:nth-child(odd) {
+
+  background-color: #A09390;
+
+}
+
+
+th {
+
+  background-color: #555;
+
+  color: #fff;
+
+}
+
+
+th,td {
+
+  text-align: center;
+
+  padding: 0.5em 1em;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}

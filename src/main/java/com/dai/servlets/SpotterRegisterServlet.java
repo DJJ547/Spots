@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dai.bean.SpotterRegisterBean;
-import com.dai.database.SpotterRegisterDB;
+import com.dai.database.SpotsDatabase;
+import com.dai.model.SpotterModel;
 
 @WebServlet("/spotterRegister")
 public class SpotterRegisterServlet extends HttpServlet {
@@ -33,15 +33,17 @@ public class SpotterRegisterServlet extends HttpServlet {
         String spotterEmail = request.getParameter("spotterEmail");
         String password = request.getParameter("password");
         
-        SpotterRegisterBean srb = new SpotterRegisterBean();
+        SpotterModel srb = new SpotterModel();
         srb.setFirstName(firstName);
         srb.setLastName(lastName);
         srb.setEmail(spotterEmail);
         srb.setPassword(password);
         
-        SpotterRegisterDB srdb = new SpotterRegisterDB();
-        String s1 = srdb.insertUser(srb);
+        SpotsDatabase spots = new SpotsDatabase();
+        String s1 = spots.insertSpotter(srb);
         System.out.println(s1);
+        
+        request.getRequestDispatcher("spotterLogin.jsp").forward(request, response);
 
     }
 }

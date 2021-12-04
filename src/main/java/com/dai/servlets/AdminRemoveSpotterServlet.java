@@ -6,19 +6,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.dai.database.SpotsDatabase;
 
 /**
- * Servlet implementation class AdminManageSpots
+ * Servlet implementation class AdminRemoveSpotterServlet
  */
-@WebServlet("/adminManageSpots")
-public class AdminManageSpotsServlet extends HttpServlet {
+@WebServlet("/adminRemoveSpotter")
+public class AdminRemoveSpotterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminManageSpotsServlet() {
+    public AdminRemoveSpotterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +35,10 @@ public class AdminManageSpotsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			request.getRequestDispatcher("adminManageSpotter.jsp").forward(request, response);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		SpotsDatabase sdb = new SpotsDatabase();
+		String email = request.getParameter("spotterEmail");
+		sdb.removeSpotter(email);
+		request.getRequestDispatcher("adminManageSpotter.jsp").forward(request, response);
 	}
 
 }

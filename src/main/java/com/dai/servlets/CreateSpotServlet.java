@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dai.database.SpotsDatabase;
-import com.dai.bean.CreateSpotBean;
+import com.dai.model.SpotModel;
 /**
  * Servlet implementation class CreateSpotServlet
  */
@@ -28,7 +28,7 @@ public class CreateSpotServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.getRequestDispatcher("createSpot.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -41,17 +41,20 @@ public class CreateSpotServlet extends HttpServlet {
         String city = request.getParameter("city");
         String zipcode = request.getParameter("zipcode");
         
-        CreateSpotBean csb = new CreateSpotBean();
+        SpotModel csb = new SpotModel();
         csb.setName(name);
         csb.setAddress(address);
         csb.setCity(city);
         csb.setZipcode(zipcode);
         
+        String email= (String)request.getSession().getAttribute("email");
+        System.out.println("session gets attribute email " + request.getAttribute("email"));
+        
         SpotsDatabase sdb = new SpotsDatabase();
-        String s1 = sdb.insertSpot(csb);
+        String s1 = sdb.insertSpot(csb, email);
         System.out.println(s1);
         
-        response.sendRedirect("spotHostPage.jsp");
+        request.getRequestDispatcher("spotHostPage.jsp").forward(request, response);
 	}
 
 }

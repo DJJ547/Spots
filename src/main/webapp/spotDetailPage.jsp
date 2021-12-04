@@ -5,9 +5,15 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
   <title >Spot Detail Page</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href=css/index.css>
   </head>
   <input type="button" value="Back to Spotter Main Page" onclick="window.location='spotterPage.jsp'" ><br/><br/>
   <body>
+  <div class="container">
+  	<img src="images/castrodowntownarea.jpg" alt='Castro Downtown Area' width="600" height="400">
+  </div>
   <% 
   String id = (String)session.getAttribute("spotID");
   %>
