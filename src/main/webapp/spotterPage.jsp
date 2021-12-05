@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
   <input type="submit" value="Search">
   </form>
   <input type="button" value="Logout" onclick="window.location='welcomePage.jsp'" ><br/><br/>
-  <%     
+<%     
 try {   
    SpotsDatabase spot = new SpotsDatabase();
    Connection con = spot.getCon();
@@ -38,16 +38,13 @@ try {
             	<th>Group Size</th><th>Category1</th><th>Category2</th><th>Category3</th>
             	<th>Noise Level</th><th>Creation date</th>
             	<%
-            	int idCounter = 1;
             	while(rs.next()){
             	%>
-            		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
+            		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><a href="spotDetailPage.jsp?spotID=<%=rs.getString(1)%>&name=<%=rs.getString(2)%>"><%= rs.getString(2) %></a></td><td align="center"><%= rs.getString(3) %></td>
             		<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
             		<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
             		<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td></tr>
-              		</form>
-              		<% 
-              		idCounter++;
+              		<%
               	}
               	%>
               </table>
