@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import com.dai.model.SpotModel;
 import com.dai.model.AdminModel;
+import com.dai.model.ReviewModel;
 import com.dai.model.SpotHostModel;
 import com.dai.model.SpotterModel;
 
@@ -358,6 +359,37 @@ public class SpotsDatabase {
 			}else {
 				s1 = "Spot is not in the favorite list.";
 			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return s1;
+	}
+	
+	public String insertReview(ReviewModel review, String email) {
+		String s1 = null;
+		try {
+			Connection con = getCon();
+			PreparedStatement pst1 = con.prepareStatement("insert into comments (comment_text) values (?)");
+			pst1.setString(1, review.getReview());
+			System.out.println(pst1);
+			pst1.executeUpdate();
+			
+			PreparedStatement pst2 = con.prepareStatement("select comment_id from comments where comment_text = ?");
+			pst2.setString(1, review.getReview());
+			ResultSet rs = pst2.executeQuery();
+			rs.next();
+			
+			PreparedStatement pst3 = con.prepareStatement("insert into leaves (spotter_email, comment_id) values (?, ?)");
+			pst3.setString(1, email);
+			pst3.setString(2, rs.getString(1));
+			
+			PreparedStatement pst4 = con.prepareStatement("update spots set group_size = ?, category1 = ?, category2 = ?, category3 = ?, noise_level = ? where spot_id = ?");
+			pst4.setString(1, review.getGroupSize());
+			pst4.setString(2, review.getCategory1());
+			pst4.setString(3, review.getCategory2());
+			pst4.setString(4, review.getCategory3());
+			pst4.setString(5, review.getNoiseLevel());
+			
 		} catch (SQLException e) {
 			printSQLException(e);
 		}

@@ -23,10 +23,12 @@ try {
    	Connection con = spot.getCon();
    	PreparedStatement pst1;
    	PreparedStatement pst2;
+   	PreparedStatement pst3;
    	ResultSet rs1;
    	ResultSet rs2;
+   	ResultSet rs3;
         
-    pst1 = con.prepareStatement("select address, city, zipcode, group_size, category_1, category_2, category_3, noise_level, creation_date, description from spots where spot_id = ?");
+    pst1 = con.prepareStatement("select address, city, zipcode, group_size, category_1, category_2, category_3, noise_level, creation_date from spots where spot_id = ?");
     pst1.setString(1, id);
     rs1 = pst1.executeQuery();
     
@@ -35,7 +37,7 @@ try {
     rs2 = pst2.executeQuery();
 %>
 	<h1 align="center">Details:</h1><br/>
-    <table align="center" border="1">
+    <table border="1">
     <tr><th>Address</th><th>City</th><th>Zip Code</th><th>Group Size</th><th>Category 1</th><th>Category 2</th>
     <th>Category 3</th><th>Noise Level</th><th>Creation Date</th><th>Average Rating</th>
 <%
@@ -46,17 +48,20 @@ try {
     	<td align="center"><%= rs1.getString(7) %></td><td align="center"><%= rs1.getString(8) %></td><td align="center"><%= rs1.getString(9) %></td>
     	<td align="center"><%= rs2.getString(1) %></td></tr>
   <%}%>
-  </table>
+  </table><br/><br/>
+  <h1 align="center">Description:</h1>
   	<%
-    if(rs1.next()){
+  	pst3 = con.prepareStatement("select description from spots where spot_id = ?");
+    pst3.setString(1, id);
+    rs3 = pst3.executeQuery();
+    rs3.next();
     %>
-    	<p>
-    	<%
-        out.println(rs1.getString(5)); //spot description
-        %>
-        </p><br/><br/>
-        <%
-    }    
+    <p>
+    <%
+    out.println(rs3.getString(1)); //spot description
+    %>
+   </p><br/><br/>
+<%   
 } catch(SQLException e) { 
     out.println("SQLException caught: " + e.getMessage()); 
 }%>
@@ -64,6 +69,9 @@ try {
 
 <div class="comment">
 <h1 align="center">Reviews:</h1><br/>
+
+<input type="button" value="Leave a comment and rating to this spot" onclick="window.location='spotterReviewSpot.jsp'" ><br/><br/>
+
 <%     
 try {   
    	SpotsDatabase spot = new SpotsDatabase();

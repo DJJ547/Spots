@@ -47,7 +47,6 @@ public class CreateSpotServlet extends HttpServlet {
         csb.setZipcode(zipcode);
         
         String email= (String)request.getSession().getAttribute("email");
-        System.out.println("session gets attribute email " + request.getAttribute("email"));
         
         SpotsDatabase sdb = new SpotsDatabase();
         String s1 = sdb.insertSpot(csb, email);
