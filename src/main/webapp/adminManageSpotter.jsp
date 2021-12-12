@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Manage Spotter Page</title>
-<link href="css/index.css" rel="stylesheet">
+<link href="css/index.css?v=<%=Math.random()%>" rel="stylesheet">
 </head>
 <body>
 <%
@@ -20,12 +20,6 @@ String firstName = (String)session.getAttribute("firstName");
 <label>Search by Spotter Name: </label>
 <input type="text" name="spotterName" class="form-control" id="spotterName" placeholder="Enter name keyword">
 <input type="submit" value="Search">
-</form>
-
-<form id="form" method="post" action="adminRemoveSpotter">
-<label>Remove By Spotter Email: </label>
-<input type="text" name="spotterEmail" class="form-control" id="spotterName" placeholder="Enter spotter email">
-<input type="submit" value="Remove">
 </form>
 
 <form id="form" method="post" action="adminManageSpotter">
@@ -44,11 +38,11 @@ try {
       	rs = pst.executeQuery();
 %>
       	<table border="1" class="center">
-      	<tr><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
+      	<tr><th>Remove</th><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
       	<%
       	while(rs.next()){
       	%>
-          	<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
+          	<tr><td align="center"><form id="form" method="post" action="adminRemoveSpotter"><button type="submit" name="getSpotterEmail" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
       <%}%>
       </table>
 <%
@@ -59,11 +53,11 @@ try {
        	rs = pst.executeQuery();
 %>
        	<table border="1" class="center">
-       	<tr><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
+       	<tr><th>Remove</th><th>Spotter Email</th><th>First Name</th><th>Last Name</th>
        	<%
        	while(rs.next()){
        	%>
-       		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
+       		<tr><td align="center"><form id="form" method="post" action="adminRemoveSpotter"><button type="submit" name="getSpotterEmail" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
       <%}%>
       	</table>
   <%}

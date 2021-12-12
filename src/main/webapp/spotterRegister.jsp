@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Spotter Register Form</title>
-<link href="css/index.css" rel="stylesheet">
+<link href="css/index.css?v=<%=Math.random()%>" rel="stylesheet">
 </head>
 <body>
  <div align="center">

@@ -8,4 +8,9 @@
   <welcome-file-list>
     <welcome-file>welcomePage.jsp</welcome-file>
   </welcome-file-list>
+  <configuration>
+    <system.webServer>
+        <caching enabled="false" enableKernelCache="false" /> <!-- This one -->
+    </system.webServer>
+</configuration>
 </web-app>

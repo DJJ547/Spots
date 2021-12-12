@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Manage Spot Host Page</title>
-<link href="css/index.css" rel="stylesheet">
+<link href="css/index.css?v=<%=Math.random()%>" rel="stylesheet"/>
 </head>
 
 <body>
@@ -21,12 +21,6 @@ String firstName = (String)session.getAttribute("firstName");
 <label>Search by Spot Host Name: </label>
 <input type="text" name="spotHostName" class="form-control" id="spotHostName" placeholder="Enter name keyword">
 <input type="submit" value="Search">
-</form>
-
-<form id="form" method="post" action="adminRemoveSpotHost">
-<label>Remove By Spot Host Email: </label>
-<input type="text" name="spotHostEmail" class="form-control" id="spotHostName" placeholder="Enter spot host email">
-<input type="submit" value="Remove">
 </form>
 
 <form id="form" method="post" action="adminManageSpotHost">
@@ -45,11 +39,11 @@ try {
       	rs = pst.executeQuery();
 %>
       	<table border="1" class="center">
-      	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
+      	<tr><th>Remove</th><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
       	<%
       	while(rs.next()){
       	%>
-          	<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
+          	<tr><td align="center"><form id="form" method="post" action="adminRemoveSpotHost"><button type="submit" name="getHostEmail" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
       <%}%>
       	</table>
 	<%
@@ -60,11 +54,11 @@ try {
        	rs = pst.executeQuery();
 	%>
        	<table border="1" class="center">
-       	<tr><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
+       	<tr><th>Remove</th><th>Spot Host Email</th><th>First Name</th><th>Last Name</th>
        	<%
        	while(rs.next()){
        	%>
-       		<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
+       		<tr><td align="center"><form id="form" method="post" action="adminRemoveSpotHost"><button type="submit" name="getHostEmail" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td></tr>
       <%}%>
       	</table>
   <%}

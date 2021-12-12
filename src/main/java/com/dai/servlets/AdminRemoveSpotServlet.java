@@ -35,7 +35,7 @@ public class AdminRemoveSpotServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SpotsDatabase sdb = new SpotsDatabase();
-		String id = request.getParameter("spotID");
+		String id = request.getParameter("getSpotID");
 		sdb.removeSpot(id);
 		request.getRequestDispatcher("adminManageSpots.jsp").forward(request, response);
 	}

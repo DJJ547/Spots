@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Manage Spots Page</title>
-<link href="css/index.css" rel="stylesheet">
+<link href="css/index.css?v=<%=Math.random()%>" rel="stylesheet">
 </head>
 <body>
 <%
@@ -20,12 +20,6 @@ String firstName = (String)session.getAttribute("firstName");
 <label>Search by Spot Name: </label>
 <input type="text" name="spotName" class="form-control" id="spotName" placeholder="Enter name keyword">
 <input type="submit" value="Search">
-</form>
-
-<form id="form" method="post" action="adminRemoveSpot">
-<label>Remove By Spot ID: </label>
-<input type="text" name="spotID" class="form-control" id="spotID" placeholder="Enter spot ID">
-<input type="submit" value="Remove">
 </form>
 
 <form id="form" method="post" action="adminManageSpots">
@@ -44,13 +38,13 @@ try {
    		rs = pst.executeQuery();
    		%>
    		<table border="1" class="center">
-   		<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
+   		<tr><th>Remove</th><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
    		<th>Group Size</th><th>Category 1</th><th>Category 2</th><th>Category 3</th>
    		<th>Noise Level</th><th>Creation Date</th></tr>
    		<%
    		while(rs.next()){
    		%>
-   			<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
+   			<tr><td align="center"><form id="form" method="post" action="adminRemoveSpot"><button type="submit" name="getSpotID" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
    			<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
    			<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
    			<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td></tr>
@@ -63,13 +57,13 @@ try {
        	rs = pst.executeQuery();
    %>
        	<table border="1" class="center">
-   		<tr><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
+   		<tr><th>Remove</th><th>Spot ID</th><th>Name</th><th>Address</th><th>City</th><th>Zip Code</th>
    		<th>Group Size</th><th>Category 1</th><th>Category 2</th><th>Category 3</th>
    		<th>Noise Level</th><th>Creation Date</th></tr>
    		<%
    		while(rs.next()){
    		%>
-   			<tr><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
+   			<tr><td align="center"><form id="form" method="post" action="adminRemoveSpot"><button type="submit" name="getSpotID" value="<%=rs.getString(1)%>">Remove</button></form></td><td align="center"><%= rs.getString(1) %></td><td align="center"><%= rs.getString(2) %></td><td align="center"><%= rs.getString(3) %></td>
    			<td align="center"><%= rs.getString(4) %></td><td align="center"><%= rs.getString(5) %></td><td align="center"><%= rs.getString(6) %></td>
    			<td align="center"><%= rs.getString(7) %></td><td align="center"><%= rs.getString(8) %></td><td align="center"><%= rs.getString(9) %></td>
    			<td align="center"><%= rs.getString(10) %></td><td align="center"><%= rs.getString(11) %></td>

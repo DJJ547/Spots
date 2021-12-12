@@ -6,20 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dai.database.SpotsDatabase;
 
 /**
- * Servlet implementation class AdminRemoveSpotterServlet
+ * Servlet implementation class SpotterAddFavoriteServlet
  */
-@WebServlet("/adminRemoveSpotter")
-public class AdminRemoveSpotterServlet extends HttpServlet {
+@WebServlet("/removefavorite")
+public class SpotterRemoveFavoriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminRemoveSpotterServlet() {
+    public SpotterRemoveFavoriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,10 +36,12 @@ public class AdminRemoveSpotterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SpotsDatabase sdb = new SpotsDatabase();
-		String email = request.getParameter("getSpotterEmail");
-		sdb.removeSpotter(email);
-		request.getRequestDispatcher("adminManageSpotter.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		String email = (String)session.getAttribute("email");
+		int spotID = Integer.parseInt(request.getParameter("getSpotID"));
+		SpotsDatabase spots = new SpotsDatabase();
+		System.out.println(spots.removeFavorite(spotID, email));
+		request.getRequestDispatcher("spotterFavoritePage.jsp").forward(request, response);
 	}
 
 }

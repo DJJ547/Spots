@@ -36,7 +36,7 @@ public class AdminRemoveSpotHostServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SpotsDatabase sdb = new SpotsDatabase();
-		String email = request.getParameter("spotHostEmail");
+		String email = request.getParameter("getHostEmail");
 		sdb.removeSpotHost(email);
 		request.getRequestDispatcher("adminManageSpotHost.jsp").forward(request, response);
 	}

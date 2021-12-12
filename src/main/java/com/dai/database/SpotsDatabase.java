@@ -309,9 +309,55 @@ public class SpotsDatabase {
 			PreparedStatement pst6 = con.prepareStatement("delete from ban where spotter_email = ?");
 			pst6.setString(1, email);
 			System.out.println(pst6);
-			pst1.executeUpdate();
+			pst6.executeUpdate();
 			
 			s1 = "Spotter successfully removed from table spotter, rate, favorite, classify, leaves, and ban.";
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return s1;
+	}
+	
+	public String addToFavorite(int spotID, String email) {
+		String s1 = null;
+		try {
+			Connection con = getCon();
+			PreparedStatement pst1 = con.prepareStatement("select * from favorite where spotter_email = ? and spot_id = ?");
+			pst1.setString(1, email);
+			pst1.setInt(2, spotID);
+			ResultSet rs = pst1.executeQuery();
+			if(!rs.next()) {
+				PreparedStatement pst2 = con.prepareStatement("insert into favorite (spotter_email, spot_id) values('"+email+"','"+spotID+"')");
+				System.out.println(pst2);
+				pst2.executeUpdate();
+				s1 = "Spot successfully added into favorite list.";
+			}else {
+				s1 = "Spot is already in the favorite list.";
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return s1;
+	}
+	
+	public String removeFavorite(int spotID, String email) {
+		String s1 = null;
+		try {
+			Connection con = getCon();
+			PreparedStatement pst1 = con.prepareStatement("select * from favorite where spotter_email = ? and spot_id = ?");
+			pst1.setString(1, email);
+			pst1.setInt(2, spotID);
+			ResultSet rs = pst1.executeQuery();
+			if(rs.next()) {
+				PreparedStatement pst2 = con.prepareStatement("delete from favorite where spotter_email = ? and spot_id = ?");
+				pst2.setString(1, email);
+				pst2.setInt(2, spotID);
+				System.out.println(pst2);
+				pst2.executeUpdate();
+				s1 = "Spot successfully removed from favorite list.";
+			}else {
+				s1 = "Spot is not in the favorite list.";
+			}
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
