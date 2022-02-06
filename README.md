@@ -3,16 +3,16 @@
 # Contributors: Edward Gerald Tomista, Yashna Peerthum, Jiajun Dai
 
 Hardware and Software used:
-	Apache Tomcat 10.0
-	Eclipse IDE
-	MySQL workbench
-	Windows 10 OS
+	Apache Tomcat 10.0, 
+	Eclipse IDE, 
+	MySQL workbench, 
+	Windows 10 OS, 
 
 RDBMS:
-	MySQL Community Server 8.0.26
+	MySQL Community Server 8.0.26, 
 
 Application Language:
-	Java, SQL, HTML, JavaScript
+	Java, SQL, HTML, JavaScript, 
   
 Here is the link to download our newest sample database in order to run the application: https://drive.google.com/file/d/1nMZFviPsFJPpkW5eRSRQSmXQwa8FvgNG/view?usp=sharing
 
