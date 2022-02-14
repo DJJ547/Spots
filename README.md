@@ -26,8 +26,7 @@ The project has four different types of users: guests, individual users with acc
 # Our ERD diagram:
 ![ERD](https://user-images.githubusercontent.com/21046341/152704522-9027ed42-f8b9-422a-af96-446fdfd361e6.png)
 
-# Our ERD Schemas:
-Entities:
+# Our ERD Entities:
 - Spots(spot_id, name, address, city, zipcode, group_size, category, noise level, creation_date)
 - Admin(admin_id, first_name, last_name)
 - SpotHost(host_email, first_name, last_name)
