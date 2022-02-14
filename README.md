@@ -2,16 +2,16 @@
 
 # Contributors: Edward Gerald Tomista, Yashna Peerthum, Jiajun Dai
 
-Hardware and Software used:
+# Hardware and Software used:
 	Apache Tomcat 10.0, 
 	Eclipse IDE, 
 	MySQL workbench, 
 	Windows 10 OS, 
 
-RDBMS:
+# RDBMS:
 	MySQL Community Server 8.0.26, 
 
-Application Language:
+# Application Language:
 	Java, JSP Servlet, SQL, HTML, CSS, JavaScript, 
   
 Here is the link to download our newest sample database in order to run the application: https://drive.google.com/file/d/1nMZFviPsFJPpkW5eRSRQSmXQwa8FvgNG/view?usp=sharing
@@ -23,10 +23,10 @@ The project has four different types of users: guests, individual users with acc
 - Guest users will be able to view and search for spots but will not be able to take any other actions without signing up to become a spotter. 
 - Admins will be responsible for managing and moderating the pages, and baning users with inappropriate activities.
 
-Our ERD diagram:
+# Our ERD diagram:
 ![ERD](https://user-images.githubusercontent.com/21046341/152704522-9027ed42-f8b9-422a-af96-446fdfd361e6.png)
 
-ERD Schemas:
+# Our ERD Schemas:
 Entities:
 - Spots(spot_id, name, address, city, zipcode, group_size, category, noise level, creation_date)
 - Admin(admin_id, first_name, last_name)
