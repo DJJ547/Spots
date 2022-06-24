@@ -1,4 +1,4 @@
-# Spots Web App
+# Spots
 
 # Contributors: Edward Gerald Tomista, Yashna Peerthum, Jiajun Dai
 
@@ -16,7 +16,7 @@
   
 Here is the link to download our newest sample database in order to run the application: https://drive.google.com/file/d/1nMZFviPsFJPpkW5eRSRQSmXQwa8FvgNG/view?usp=sharing
 
-This project is a web application on creating, searching and rating on hangout spots. The spots will be classified according to spot host's classification and spotter's classification. 
+This project is a web application that allows users to create, search and rate hangout spots. The spots will be classified base on user classification. 
 The project has four different types of users: guests, individual users with accounts whom we will call spotters, spot hosts and admins. 
 - The spot hosts will be able to create their spot pages, view their spots’ ratings and comments that spotters leave, and update their information such as name, address, images, and operating hours. 
 - The spotters will be able to easily search the spots they like and leave ratings, classification, and comments on the spot page which they have visited as well as favorite the spots they like best. 
